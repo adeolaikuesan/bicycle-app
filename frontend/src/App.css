@@ -1,0 +1,19 @@
+@font-face {
+  font-family: "Raleway-Medium"; 
+  src: url("./fonts/Raleway-SemiBold.woff") format("woff");
+}
+
+body {
+  font-family: "Raleway-Medium", "Roboto", sans-serif;
+}
+
+
+h1 {
+  font-weight: 500;
+  font-size: 2rem;
+  /* padding: 24px; */
+}
+
+.heading {
+  padding: 24px;
+}
