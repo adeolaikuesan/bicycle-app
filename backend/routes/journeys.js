@@ -21,8 +21,17 @@ const QueryStream = require('pg-query-stream');
 
 router.get('/', (req, res) => {
   const rows = [];
+  console.log(req.query.limit)
 
-  const query = new QueryStream('SELECT * FROM public."Journeys2" LIMIT 100000');
+  const page = req.query.page // Get the pagination page
+  const per_page = req.query.limit // Indicates how many rows are visible on screen
+
+  // const sort_field = req.query.sort;
+  // const sort_order = req.query.order;
+
+  // LIMIT ${limit} OFFSET ${page * per_page}
+
+  const query = new QueryStream(`SELECT * FROM public."Journeys2" WHERE duration > 10 AND covered_distance > 10 LIMIT 10000 ` );
   const stream = client.query(query);
 
   stream.on('data', (row) => {
@@ -37,5 +46,5 @@ router.get('/', (req, res) => {
     res.status(500).send(err);
   });
 });
-  
+
 module.exports = router;

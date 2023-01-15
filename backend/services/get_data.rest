@@ -1,1 +1,1 @@
-GET http://localhost:5001/api/journeys/
+GET http://localhost:5001/api/stations/returns/?id=547

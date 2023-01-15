@@ -1,2 +1,2 @@
-GET http://localhost:5001/api/stations
+GET http:///localhost:5001/api/stations/returns/?id=501
 
