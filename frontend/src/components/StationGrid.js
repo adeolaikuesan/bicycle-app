@@ -7,7 +7,6 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 
-
 const style = {
   position: "absolute",
   top: "50%",
@@ -40,59 +39,32 @@ function DataGridForStations() {
     // console.log(id)
 
     try {
-      const [response1, response2,response3] = await Promise.all([
-          axios.get(`http://localhost:5001/api/stations/departures/?id=${id}`),
-          axios.get(`http://localhost:5001/api/stations/returns/?id=${id}`),
-          axios.get(`http://localhost:5001/api/stations/returns/avg/?id=${id}`)
+      const [response1, response2, response3] = await Promise.all([
+        axios.get(`http://localhost:5001/api/stations/departures/?id=${id}`),
+        axios.get(`http://localhost:5001/api/stations/returns/?id=${id}`),
+        axios.get(`http://localhost:5001/api/stations/returns/avg/?id=${id}`),
       ]);
       // console.log(response1.data);
       // console.log(response2.data);
       // console.log(response3.data);
 
       setDeparture(response1.data[0].count);
-      setReturn(response2.data[0].count)
+      setReturn(response2.data[0].count);
 
-      setAvgReturn(Math.round(response3.data[0].avg)/1000)
-      } catch (error) {
-          console.error(error);
-      }
-
-
-    // await axios.get(`http://localhost:5001/api/stations/departures/?id=${id}`).then((response) => {
-    //   // console.log(response.data)
-    //   setDeparture(response1.data[0].count);
-    //  console.log(response)
-    //  console.log(departure)
-    //   // console.log(typeof data);
-    // });
-
-    // await axios.get(`http://localhost:5001/api/stations/returns/?id=${id}`).then((response) => {
-    //   // console.log(response.data)
-    // setEnd(response.data[0].count);
-    // //  console.log(response)
-    // //  console.log(departure)
-    //   // console.log(typeof data);
-    // });
+      setAvgReturn(Math.round(response3.data[0].avg / 100) /10);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
-  //   const getJourneyData = async (name) => {
-  //     await axios.get(`http://localhost:5001/api/journeys/?name=${name}`).then((response) => {
-  //         console.log(response.data)
-  //         // setData(response.data)
-  //         // console.log(typeof data);
-  // })
-  // }
+
 
   useEffect(() => {
     getStationData();
-
-    
-
   }, []);
 
   const handleOpen = (rowData) => {
-
-    getDepartures(rowData.id)
+    getDepartures(rowData.id);
     // console.log(rowData)
     setRowData(rowData);
     // console.log(rowData.Nimi);
@@ -122,8 +94,6 @@ function DataGridForStations() {
     { field: "Name", headerName: "Station Name", flex: 10 },
   ];
 
-
-
   const handleClose = () => {
     setOpen(false);
   };
@@ -149,7 +119,10 @@ function DataGridForStations() {
             <br></br>
             Total number of journeys ending at the station: {returns}
             <br></br>
-            The average distance of a journey ending at the station: {avgReturn} km
+            The average distance of a journey ending at the station: {
+              avgReturn
+            }{" "}
+            km
           </Typography>
 
           <Typography id="modal-modal-description" sx={{ mt: 2 }}></Typography>
